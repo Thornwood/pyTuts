@@ -20,13 +20,13 @@ while (cap.isOpened()):
     color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
 
     # Display an original image
-    cv2.imshow("CAM Original", color)
+    # cv2.imshow("CAM Original", color)
 
     # Display grayscale image
     grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Display in grayscale image
-    # cv2.imshow('Grayscale filter', grayscale)
+    cv2.imshow('Grayscale filter', grayscale)
 
     # finds edges in the input image image and
     # marks them in the output map edges

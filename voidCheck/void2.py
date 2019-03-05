@@ -2,13 +2,11 @@
 from __future__ import print_function
 # import os
 import cv2 as cv
-import numpy as np
-from matplotlib import pyplot as plt
 
 # Values
-blur = 5
-min_tresh = 35
-max_tresh = 150
+blur = 15
+min_tresh = 116
+max_tresh = 255
 
 
 # region Image convert functions
@@ -49,8 +47,8 @@ def to_blur(image, _blur):
 
 
 # Convert image to Median Blurred
-def to_mblur(image):
-    image = cv.medianBlur(image, 5)
+def to_mblur(image, _blur):
+    image = cv.medianBlur(image, _blur)
     return image
 
 
@@ -65,11 +63,12 @@ def calchist(image):
 img = cv.imread("roentgen/images/20190228132404_001_1_IO.jpg")
 img = to_gray(img)
 
-hist = cv.calcHist([img], [0], None, [256], [0, 256])
-plt.hist(img.ravel(), 256, [0, 256])
-plt.title('Histogram for gray scale picture')
-plt.show()
+img2 = to_mblur(img, blur)
+img3 = to_binary(img2, min_tresh, max_tresh)
+img4 = to_otsu(img3, min_tresh, max_tresh)
 
-cv.imshow('Image', img)
+cv.imshow('Image', img2)
+cv.imshow('Image4', img4)
+
 cv.waitKey(0)
 cv.destroyAllWindows()

@@ -254,7 +254,14 @@ im_with_keypoints = cv.drawKeypoints(im, keypoints, np.array([]), (0,0,255), cv.
 # Show blobs
 cv.imshow("Keypoints", im_with_keypoints)
 '''
+'''
+ret, thresh = cv.threshold(img3, 118, 255, 0)
+_, contours, hierarchy = cv.findContours(thresh, 1, 2)
 
+for cnt in contours:
+    approx = cv.approxPolyDP(cnt, 0.021 * cv.arcLength(cnt, True), True)
+    cv.drawContours(img, [approx], 0, (0), 5)
+'''
 
 
 
